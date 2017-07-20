@@ -7,7 +7,7 @@ Nationality : South Korea
 TV rating - http://www.nielsenkorea.co.kr/
 Drama Clip(comment data) - http://tv.naver.com/
        
-## body
+## Body
 The South Korea have two ideal envrionment about studying that something is influence tv rating.
 First, the KR is small country, that is why Korean measure compareatively accurate tv rating.
 Second, the KR converge Korean on NAVER.com for search STH or social behavior.
@@ -39,15 +39,28 @@ Multi Lnear Regression for predicting tv rating by Naver data.
 Libs : numpy, pandas, scikit-learn.linear_model -> develop linear regression
        matplotlib.pyplot, seaborn -> data visualization
 
-5. Support Vector Machine
+5. Support Vector Machine                            <============= NOW proceeding!!
 The correlationship between tv rating and NAVER comment data can be thought of as a none linear model.
 And because comment data 7-dimensionsrfdec
 So, I predict tv rating by SVM(kernel : 'rbf'=gaussian)
+Referrence : https://tensorflow.blog/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/
 
 6. Neural Network
+TBD...
 
 ## Develop environment
+1. python 3.6
+Anaconda3 4.3.1
+(matplotlib 2.0.0
+numpy 1.11.3
+scikit-learn 0.18.1
+seaborn 0.7.1)
+Source IDE : Wing IDE 101
+Visualize IDE : Jupyter notebook
 
-## 개선점
-1. 데이터가적음
-2. 
+2. MySQL
+
+3. MS Excel 2010
+
+## Problem
+Adequate data is severely lacking. But, Time will solve them.
