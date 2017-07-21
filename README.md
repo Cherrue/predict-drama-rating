@@ -1,6 +1,6 @@
 # predictDramaRating
 ## Abstract
-Predict korean drama tv rate by users behavior in social network by python
+Predict Korean drama tv rate by users behavior in social network by python
 
 Nationality : South Korea
 
@@ -10,7 +10,7 @@ Drama Clip(comment data) - http://tv.naver.com/
 ## Body
 The South Korea have two ideal envrionment about studying that something is influence tv rating.
 First, the KR is small country, that is why Korean measure compareatively accurate tv rating.
-Second, the KR converge Korean on NAVER.com for search STH or social behavior.
+Second, the Korean converge on NAVER.com for search STH or social behavior.
 
 Then, I formulate a hypothesis that naver user's behaviors in drama clip have relation with TV rate.
 To prove my hypothesis, i will use 
@@ -41,8 +41,8 @@ Libs : numpy, pandas, scikit-learn.linear_model -> develop linear regression
 
 5. Support Vector Machine                            <============= NOW proceeding!!
 The correlationship between tv rating and NAVER comment data can be thought of as a none linear model.
-And because comment data 7-dimensionsrfdec
-So, I predict tv rating by SVM(kernel : 'rbf'=gaussian)
+And comment data is 7-dimensions.
+So I predict tv rating by SVM(kernel : 'rbf'=gaussian)
 Referrence : https://tensorflow.blog/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/
 
 6. Neural Network
@@ -58,7 +58,7 @@ seaborn 0.7.1)
 Source IDE : Wing IDE 101
 Visualize IDE : Jupyter notebook
 
-2. MySQL
+2. MySQL 5.7.11 (local server)
 
 3. MS Excel 2010
 
