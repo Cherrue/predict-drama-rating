@@ -12,7 +12,10 @@ driver=webdriver.Chrome('C:\Python34\chromedriver.exe')
 #pre-build list and variable
 db.execute("SELECT max(drama_id) FROM tv.tvcast_drama_list;")
 table = db.fetchall()
-i=int(table[0][0])+1
+if table[0][0] is None:
+    i=0
+else:
+    i=int(table[0][0])+1
 
 db.execute("SELECT * FROM tv.tvcast_drama_list;")
 table = db.fetchall()
@@ -22,8 +25,8 @@ for row in table:
     
 
 driver.get('http://tv.naver.com/c/drama/channels')
-#first parse drama number = 663 / 2017.03.21
-#second parse drama number = 803 / 2017.07.21
+##first parse drama number = 663 / 2017.03.21
+##second parse drama number = 803 / 2017.07.21
 while(True):
     time.sleep(0.7)
     try:
@@ -40,7 +43,8 @@ for drama_list_tag_list in drama_list_tag:
     iterator = drama_list_tag_list.find_all('li')
     for element in iterator:
         drama_tag.append(element)
-        
+      
+t0 = time.time()  
 pre_exist_num=0
 for drama in drama_tag: 
     info = drama.find('a','info_a')
@@ -54,3 +58,6 @@ for drama in drama_tag:
         print(i,drama_title)
         db.execute("insert into tv.tvcast_drama_list VALUES(%d,'%s','%s')"%(i,drama_title,drama_url))
         i+=1
+        
+parse_time = time.time() - t0
+print("insert : ",i,"already exist : ",pre_exist_num,"parse time : ",parse_time)
