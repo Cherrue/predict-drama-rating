@@ -9,7 +9,7 @@ connect=odbc.odbc('tv')
 db=connect.cursor()
 driver=webdriver.Chrome('C:\Python34\chromedriver.exe') 
 
-db.execute("SELECT * FROM tv.tvcast_video_list_re;")
+db.execute("SELECT * FROM tv.tvcast_video_list_re where video_id>1708049;")
 video_list = db.fetchall()
 ###----------running time----------###
 ###----------tvcast_video_list : about 6days----------###
