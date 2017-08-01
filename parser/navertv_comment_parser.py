@@ -9,33 +9,42 @@ connect=odbc.odbc('tv')
 db=connect.cursor()
 driver=webdriver.Chrome('C:\Python34\chromedriver.exe') 
 
-db.execute("SELECT * FROM tv.tvcast_video_list_re2;")
+db.execute("SELECT * FROM tv.tvcast_video_list_re where video_id>1708049;")
 video_list = db.fetchall()
-###----------running time : about 6 days----------###
+###----------running time----------###
+###----------tvcast_video_list : about 6days----------###
+###----------tvcast_video_list_re : about 2.5days----------###
 
 
 for video in video_list:
-    print(video[1])
+    print(video[2])
     isDelete_video = 0
-    url = "http://tvcast.naver.com/v/"+str(video[1])
+    url = "http://tvcast.naver.com/v/"+str(video[2])
     
     once_more = True
     
     while once_more:
-        driver.get(url)
-        time.sleep(2)
+        # network error
+        try:
+            driver.get(url)
+        except:
+            print("network exception retry..",datetime.datetime.now())
+            time.sleep(10)
+            continue
+        time.sleep(0.7)
+        # loading error / deleted video
         try:
             once_more = False
             driver.find_elements_by_xpath("//a[contains(@ class,'u_cbox_select')]")[1].click()
         except:
             once_more = True
-            time.sleep(2)
+            time.sleep(0.7)
             print("can't find ÀüÃ¼´ñ±Û button!!!!")
             isDelete_video+=1
-            if(isDelete_video>10):
+            if(isDelete_video>5):
                 break
         time.sleep(0.3)
-    if(isDelete_video>10):
+    if(isDelete_video>5):
         continue
         
     #parse
@@ -59,9 +68,9 @@ for video in video_list:
             bad = int(comment.find('em','u_cbox_cnt_unrecomm').string.strip())
             
             try:
-                db.execute("INSERT into tv.tvcast_comment_list2 VALUES(%d, %d,'%s','%s','%s',%d, %d,'%s')" %(int(video[0]),int(video[1]),nick,contents,date,good,bad,datetime.datetime.now()))
+                db.execute("INSERT into tv.tvcast_comment_list VALUES(%d, %d,'%s','%s','%s',%d, %d,'%s')" %(int(video[0]),int(video[2]),nick,contents,date,good,bad,datetime.datetime.now()))
             except:
-                db.execute("INSERT into tv.tvcast_comment_list2 VALUES(%d, %d,'%s','%s','%s',%d, %d,'%s')" %(int(video[0]),int(video[1]),nick,'including imoticon',date,good,bad,datetime.datetime.now()))
+                db.execute("INSERT into tv.tvcast_comment_list VALUES(%d, %d,'%s','%s','%s',%d, %d,'%s')" %(int(video[0]),int(video[2]),nick,'including imoticon',date,good,bad,datetime.datetime.now()))
         try: #go next page
             if(i%5==0):
                 driver.find_elements_by_xpath("//a[contains(@ class,'u_cbox_page')]")[0].click()
