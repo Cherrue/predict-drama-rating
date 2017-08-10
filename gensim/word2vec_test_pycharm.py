@@ -14,7 +14,7 @@
 #         print(line[0], line[1], sentence)
 #         sentences.append(sentence)
 #         sentence = [line[3]]
-#         uid += 1
+#         uid +=word
 #         beforeWriter = line[1]
 #     else:
 #         sentence.append(line[3])
@@ -23,5 +23,31 @@
 #
 # model.save('word2vec_test_pychar_model')
 import gensim
-new_model = gensim.models.Word2Vec.load('word2vec_test_pychar_model')
-print(new_model.wv['선보'])
+from sklearn.manifold import TSNE
+import matplotlib.pyplot as plt
+import pandas as pd
+model = gensim.models.Word2Vec.load('word2vec_test_pychar_model')
+#print(new_model.wv['선보'])
+
+vocab = list(model.wv.vocab)
+X = model[vocab]
+
+tsne = TSNE(n_components=2)
+X_tsne = tsne.fit_transform(X)
+print("df start")
+df = pd.concat([pd.DataFrame(X_tsne),
+                pd.Series(vocab)],
+               axis=1)
+
+print("df finish")
+df.columns = ['x', 'y', 'word']
+
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
+
+ax.scatter(df['x'], df['y'])
+
+#for i, txt in enumerate(df['word']):
+#    ax.annotate(txt, (df['x'].iloc[i], df['y'].iloc[i]))
+
+fig.show()
