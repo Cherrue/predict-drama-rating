@@ -42,6 +42,22 @@ for row in data:
     datas.append(temp)
 
 def tokenize(doc):
-    # norm, stem¿∫ optional
+    # norm, stemÏùÄ optional
     return ['/'.join(t) for t in pos_tagger.pos(doc, norm=True, stem=True)]
 docs = [(tokenize(row[1]), row[2]) for row in datas]
+
+from pprint import pprint
+pprint(docs[0])
+
+from collections import namedtuple
+
+taggedDoc = namedtuple('TaggedDocument','words tags')
+tagged_docs = [taggedDoc(d,[c]) for d, c in docs]
+
+from gensim.models import doc2vec
+doc_vectorizer = doc2vec.Doc2Vec(size=300,alpha=0.025,min_alpha=0.025,seed=1234)
+doc_vectorizer.build_vocab(tagged_docs,total_words=len(tagged_docs),epochs=epoch)
+for epoch in range(10):
+    doc_vectorizer.train(tagged_docs,total_words=len(tagged_docs),epochs=epoch)
+    doc_vectorizer.alpha -= 0.002
+    doc_vectorizer.min_alpha = doc_vectorizer.alpha
