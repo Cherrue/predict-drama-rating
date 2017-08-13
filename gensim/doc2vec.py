@@ -61,3 +61,4 @@ for epoch in range(10):
     doc_vectorizer.train(tagged_docs,total_words=len(tagged_docs),epochs=epoch)
     doc_vectorizer.alpha -= 0.002
     doc_vectorizer.min_alpha = doc_vectorizer.alpha
+doc_vectorizer.save('doc2vec.model')
