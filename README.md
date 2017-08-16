@@ -39,14 +39,15 @@ Multi Lnear Regression for predicting tv rating by Naver data.
 Libs : numpy, pandas, scikit-learn.linear_model -> develop linear regression
        matplotlib.pyplot, seaborn -> data visualization
 
-### Support Vector Machine                            <============= NOW proceeding!!
+### Support Vector Machine                            
 The correlationship between tv rating and NAVER comment data can be thought of as a none linear model.
-And comment data is 7-dimensions.
+Thus,comment data is 7-dimensions.
 So I predict tv rating by SVM(kernel : 'rbf'=gaussian)
 Referrence : https://tensorflow.blog/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/
+http://scikit-learn.org/stable/
 
-### Neural Network
-TBD...
+### Neural Network - Word2Vec, Doc2Vec
+I train model by gensim.word2vec and doc2vec, and test direction of comments' vector.
 
 ## Develop environment
 ### python 3.6
@@ -55,6 +56,8 @@ Anaconda3 4.3.1
 numpy 1.11.3
 scikit-learn 0.18.1
 seaborn 0.7.1)
+morpheme tagging : konlpy
+gensim 2.3.0
 Source IDE : Wing IDE 101
 Visualize IDE : Jupyter notebook
 
